@@ -8,6 +8,27 @@ All you have to do is to clone this repo and get your hands dirty with those exa
 
 ## Elementary Tasks
 
+### 0. Create your own namespace
+
+Update the Namespace manifest `namespace.yaml` in `example` directory, substitute ${YOUR_NAMESPACE} with your namespace 
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ${YOUR_NAMESPACE}
+```
+
+ ```shell
+ kubectl create -f example/namespace.yaml
+ ```
+
+ Expected results:
+
+ ```shell
+namespace/${YOUR_NAMESPACE} created
+ ```
+
 ### 1. Deploy your own Nginx with using Deployment.
 
 Update the Deployment manifest in `example` directory, substitute ${YOUR_NAMESPACE} with your namespace, choose `nginx:1.14.2` as application image:
@@ -16,7 +37,7 @@ Update the Deployment manifest in `example` directory, substitute ${YOUR_NAMESPA
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx-deployment
+  name: nginx
   namespace: ${YOUR_NAMESPACE}
   labels:
     app: nginx
@@ -47,6 +68,15 @@ Check the Pod status:
 
 ```shell
 kubectl get pod -n ${YOUR_NAMESPACE}
+```
+
+Expected results:
+
+```shell
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-66b6c48dd5-74cbs   1/1     Running   0          5s
+nginx-66b6c48dd5-9hqff   1/1     Running   0          5s
+nginx-66b6c48dd5-prslc   1/1     Running   0          5s
 ```
 
 ### 2. Access your Nginx from your laptop.
