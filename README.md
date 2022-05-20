@@ -444,8 +444,10 @@ To have better `Ingress` experience, you need a AWS EKS cluster or GCP GKE clust
 ### 3. Deploy a ShardingSphere Proxy Cluster.
 
 ### 4. Using `Helm` to setup ShardingSphere Proxy Cluster.
+[ShardingSphere Charts](https://github.com/apache/shardingsphere/tree/master/shardingsphere-charts)
 
 ### 5. Using `Operator` to setup ShardingSphere Proxy Cluster.
+[ShardingSphere Operator](https://github.com/sphereex/shardingsphere-operator)
 
 ## Ultimate tasks
 
