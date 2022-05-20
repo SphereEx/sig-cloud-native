@@ -132,11 +132,48 @@ Commercial support is available at
 
 ### 3. Do some scaling to your Nginx.
 
+`kubectl` provides convienent subcommand to scale your Nginx:
+
+Scale to zero replicas and no incoming request will be received:
+
+```shell
+kubectl scale deployment nginx --replicas=0 -n ${YOUR_NAMESPACE} 
+```
+
+Expected results:
+
+```shell
+deployment.apps/nginx scaled
+```
+
+When get Pods with `kubectl get pods -n ${YOUR_NAMESPACE}`, you can see that:
+
+```shell
+No resources found in ${YOUR_NAMESPACE} namespace.
+```
+
+Scale with more replicas in case of any traffic spikes:
+```shell
+kubectl scale deployment nginx --replicas=5 -n ${YOUR_NAMESPACE}
+```
+
+Expected results:
+
+```shell
+NAME                     READY   STATUS    RESTARTS   AGE
+nginx-66b6c48dd5-4tbg2   1/1     Running   0          36s
+nginx-66b6c48dd5-5jgtl   1/1     Running   0          36s
+nginx-66b6c48dd5-ctxr8   1/1     Running   0          36s
+nginx-66b6c48dd5-jhszm   1/1     Running   0          36s
+nginx-66b6c48dd5-vqkv8   1/1     Running   0          36s
+```
+
 ### 4. How to custom index.html with ConfigMap ?
 
 ### 5. How to avoid the problem when accessing the specific Pod ?  
 
 ### 6. Try Loadbalance and Ingress.
+
 
 ## Advanced Tasks
 
