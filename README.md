@@ -19,19 +19,14 @@ Elementary Tasks:
 Advanced Tasks
 
 - [1. Deploy a MySQL instance](https://github.com/SphereEx/sig-cloud-native#1-deploy-a-mysql-instance)
-
 - [2. Deploy a Zookeeper Cluster](https://github.com/SphereEx/sig-cloud-native#2-deploy-a-zookeeper-cluster)
-
 - [3. Deploy a ShardingSphere Proxy Cluster](https://github.com/SphereEx/sig-cloud-native#3-deploy-a-shardingsphere-proxy-cluster)
-
 - [4. Using `Helm` to setup ShardingSphere Proxy Cluster](https://github.com/SphereEx/sig-cloud-native#4-using-helm-to-setup-shardingsphere-proxy-cluster)
-
 - [5. Using `Operator` to setup ShardingSphere Proxy Cluster](https://github.com/SphereEx/sig-cloud-native#5-using-operator-to-setup-shardingsphere-proxy-cluster)
 
 Ultimate tasks
 
 - [1. Find the fragile parts of the deployment pattern](https://github.com/SphereEx/sig-cloud-native#1-find-the-fragile-parts-of-the-deployment-pattern)
-
 - [2. How to adopt the cloud native smell ? ](https://github.com/SphereEx/sig-cloud-native#2-how-to-adopt-the-cloud-native-smell-)
 
 
@@ -334,6 +329,71 @@ After all Pods have been updated, then `curl localhost` you can see the expected
 
 ### 5. How to avoid the problem when accessing the specific Pod ?  
 
+TGIService! 
+
+You can bind a `Service` to have loadbalance and readiness probe to your Nginx!
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app.kubernetes.io/name: proxy
+  ports:
+  - name: name-of-service-port
+    protocol: TCP
+    port: 80
+    targetPort: http-web-svc
+```
+
+Create a `Service` for your Nginx:
+
+```shell
+kubectl create service nginx -n ${YOUR_NAMESPACE}
+```
+
+Check accessbility of your Service:
+```shell
+kubectl port-forward svc/nginx 8080:8080 -n ${YOUR_NAMESPACE} 
+```
+
+Expected results:
+
+```shell
+Forwarding from 127.0.0.1:8080 -> 80
+Forwarding from [::1]:8080 -> 80
+```
+`curl localhost:8080`
+
+```shell
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome ${YOUR_NAME}!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome ${YOUR_NAME}!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
 
 ### 6. Try Loadbalance and Ingress.
 
