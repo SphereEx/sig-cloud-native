@@ -355,7 +355,7 @@ spec:
 Create a `Service` for your Nginx:
 
 ```shell
-kubectl create service nginx -n ${YOUR_NAMESPACE}
+kubectl create -f example/service.yaml
 ```
 
 Check accessbility of your Service:
