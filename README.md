@@ -74,12 +74,61 @@ Expected results:
 
 ```shell
 NAME                     READY   STATUS    RESTARTS   AGE
-nginx-66b6c48dd5-74cbs   1/1     Running   0          5s
-nginx-66b6c48dd5-9hqff   1/1     Running   0          5s
-nginx-66b6c48dd5-prslc   1/1     Running   0          5s
+nginx-66b6c48dd5-4xpnf   1/1     Running   0          27s
+nginx-66b6c48dd5-95955   1/1     Running   0          27s
+nginx-66b6c48dd5-jk7fk   1/1     Running   0          27s
 ```
 
 ### 2. Access your Nginx from your laptop.
+
+With the help of `Port-Forward` of Kubenetes, you can access to your Nginx instance very easily.
+
+```shell
+kubectl port-forward pod/nginx-66b6c48dd5-jk7fk 80:80 -n ${YOUR_NAMESPACE}
+```
+
+Expected results:
+
+```shell
+Forwarding from 127.0.0.1:80 -> 80
+Forwarding from [::1]:80 -> 80
+```
+
+Or just `curl` this endpoint:
+
+```shell
+curl localhost
+```
+
+Expected results:
+
+```shell
+<!DOCTYPE html>
+<html>
+<head>
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Welcome to nginx!</h1>
+<p>If you see this page, the nginx web server is successfully installed and
+working. Further configuration is required.</p>
+
+<p>For online documentation and support please refer to
+<a href="http://nginx.org/">nginx.org</a>.<br/>
+Commercial support is available at
+<a href="http://nginx.com/">nginx.com</a>.</p>
+
+<p><em>Thank you for using nginx.</em></p>
+</body>
+</html>
+```
 
 ### 3. Do some scaling to your Nginx.
 
