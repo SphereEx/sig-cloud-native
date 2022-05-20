@@ -333,19 +333,23 @@ TGIService!
 
 You can bind a `Service` to have loadbalance and readiness probe to your Nginx!
 
+Using `selector` to match the labels of Nginx `Pods`, `Service` treat them as traffic endpoints:
+
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx-service
+  name: nginx
+  namespace: ${YOUR_NAMESPACE}
 spec:
+  type: ClusterIP
   selector:
-    app.kubernetes.io/name: proxy
+    app: nginx
   ports:
-  - name: name-of-service-port
+  - name: http
     protocol: TCP
-    port: 80
-    targetPort: http-web-svc
+    port: 8080
+    targetPort: 80
 ```
 
 Create a `Service` for your Nginx:
@@ -365,7 +369,7 @@ Expected results:
 Forwarding from 127.0.0.1:8080 -> 80
 Forwarding from [::1]:8080 -> 80
 ```
-`curl localhost:8080`
+Execute `curl localhost:8080` to reach to Nginx through this `Service`:
 
 ```shell
 <!DOCTYPE html>
@@ -396,6 +400,39 @@ Commercial support is available at
 ```
 
 ### 6. Try Loadbalance and Ingress.
+
+Service have serveral types, one of them is `LoadBalancer`, which means the `Nginx` service will be exposed with a public endpoints, such as EIP, ALB, depends on different cloud vendor.To update a existed workload with a manifest file, you need to use `kubectl apply` instead of `kubectl create`. 
+
+Update the `type` property in `spec` of Nginx `Service` from `ClusterIP` to `LoadBalancer`: 
+
+```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: ${YOUR_NAMESPACE}
+spec:
+  type: LoadBalancer
+  selector:
+    app: nginx
+  ports:
+  - name: http
+    protocol: TCP
+    port: 8080
+    targetPort: 8
+```
+
+Then you can get the external address:
+```shell
+NAME    TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+nginx   LoadBalancer   172.17.172.227   106.75.26.68   8080:32478/TCP   62m
+```
+
+Now the `106.75.26.68` the public IP address of your application Nginx.
+
+
+
+To have better `Ingress` experience, you need a AWS EKS cluster or GCP GKE cluster for test.
 
 
 ## Advanced Tasks

@@ -4,6 +4,7 @@ metadata:
   name: nginx
   namespace: ${YOUR_NAMESPACE}
 spec:
+  type: ClusterIP
   selector:
     app: nginx 
   ports:
