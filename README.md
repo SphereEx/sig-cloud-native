@@ -6,6 +6,35 @@ Welcome to SIG-CloudNative of SphereEx!
 
 All you have to do is to clone this repo and get your hands dirty with those examples!
 
+Elementary Tasks:
+
+- [0. Create your own namespace](https://github.com/SphereEx/sig-cloud-native#0-create-your-own-namespace)
+- [1. Deploy your own Nginx with using Deployment](https://github.com/SphereEx/sig-cloud-native#1-deploy-your-own-nginx-with-using-deployment)
+- [2. Access your Nginx from your laptop](https://github.com/SphereEx/sig-cloud-native#2-access-your-nginx-from-your-laptop)
+- [3. Do some scaling to your Nginx](https://github.com/SphereEx/sig-cloud-native#3-do-some-scaling-to-your-nginx)
+- [4. How to custom index.html with ConfigMap ?](https://github.com/SphereEx/sig-cloud-native#4-how-to-custom-indexhtml-with-configmap-)
+- [5. How to avoid the problem when accessing the specific Pod ? ](https://github.com/SphereEx/sig-cloud-native#5-how-to-avoid-the-problem-when-accessing-the-specific-pod-) 
+- [6. Try Loadbalance and Ingress](https://github.com/SphereEx/sig-cloud-native#6-try-loadbalance-and-ingress)
+
+Advanced Tasks
+
+- [1. Deploy a MySQL instance](https://github.com/SphereEx/sig-cloud-native#1-deploy-a-mysql-instance)
+
+- [2. Deploy a Zookeeper Cluster](https://github.com/SphereEx/sig-cloud-native#2-deploy-a-zookeeper-cluster)
+
+- [3. Deploy a ShardingSphere Proxy Cluster](https://github.com/SphereEx/sig-cloud-native#3-deploy-a-shardingsphere-proxy-cluster)
+
+- [4. Using `Helm` to setup ShardingSphere Proxy Cluster](https://github.com/SphereEx/sig-cloud-native#4-using-helm-to-setup-shardingsphere-proxy-cluster)
+
+- [5. Using `Operator` to setup ShardingSphere Proxy Cluster](https://github.com/SphereEx/sig-cloud-native#5-using-operator-to-setup-shardingsphere-proxy-cluster)
+
+Ultimate tasks
+
+- [1. Find the fragile parts of the deployment pattern](https://github.com/SphereEx/sig-cloud-native#1-find-the-fragile-parts-of-the-deployment-pattern)
+
+- [2. How to adopt the cloud native smell ? ](https://github.com/SphereEx/sig-cloud-native#2-how-to-adopt-the-cloud-native-smell-)
+
+
 ## Elementary Tasks
 
 ### 0. Create your own namespace
